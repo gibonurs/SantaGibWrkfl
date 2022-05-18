@@ -33,6 +33,6 @@ jobs:
           git add .
           git commit -m "Github Agent | Workflows has updated"
           git remote add origin https://${{ secrets.ORG_ADMIN_TOKEN }}@github.com/gibonurs/SantaGib_${{ github.event.inputs.resourceType }}_${{ github.event.inputs.depName }}.git
-          git push
+          git push -u origin master
         
 
