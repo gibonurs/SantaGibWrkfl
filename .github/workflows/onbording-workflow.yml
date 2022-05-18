@@ -20,9 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Creating Repository
     steps:
-      - name: test
+      - name: Create Folder
+        run: mkdir SantaGib_${{ github.event.inputs.resourceType }}_${{ github.event.inputs.depName }}
+      - name: Initialze Repository
         shell: bash
-        working-directory: ./SantaGib_${{ github.event.inputs.resourceType }}_${{ github.event.inputs.depName }}
+        working-directory: SantaGib_${{ github.event.inputs.resourceType }}_${{ github.event.inputs.depName }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
