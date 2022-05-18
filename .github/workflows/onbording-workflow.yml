@@ -26,6 +26,7 @@ jobs:
         shell: bash
         working-directory: SantaGib_${{ github.event.inputs.resourceType }}_${{ github.event.inputs.depName }}
         run: |
+          touch README.md
           git init
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
