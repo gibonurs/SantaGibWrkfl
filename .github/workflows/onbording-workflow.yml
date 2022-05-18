@@ -1,0 +1,32 @@
+# This workflow copy a specific template to the application target repository 
+
+name: Onboarding Workflow
+on:
+ workflow_dispatch :
+    inputs:
+        resourceType:
+          required: true
+          description: Choose resource type (Compute, Network, Application)         
+          type: choice
+          options: 
+           - Compute
+           - Network
+        depName:
+          required: true
+          description: Name of departament
+
+jobs:
+  create-repository:
+    runs-on: ubuntu-latest
+    name: Creating Repository
+    steps:
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+      - name: Creating GitHub Repository
+        uses: repo-ctrl/create-repo-action@main 
+        id: create-repo
+        with:
+          repo-name: "SantaGib_${{ github.event.inputs.resourceType }}_${{ github.event.inputs.depName }}"
+          org-admin-token: '${{ secrets.ORG_ADMIN_TOKEN }}'
+      - name: Log URL to the repo
+        run: echo "The new repo is ${{ steps.create-repo.outputs.repo-url }}"
