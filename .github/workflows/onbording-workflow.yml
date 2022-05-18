@@ -20,19 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Creating Repository
     steps:
-      - name: Create Folder
-        run: mkdir SantaGib_${{ github.event.inputs.resourceType }}_${{ github.event.inputs.depName }}
-      - name: Initialze Repository
-        shell: bash
-        working-directory: SantaGib_${{ github.event.inputs.resourceType }}_${{ github.event.inputs.depName }}
+      - name: Github API Call
         run: |
-          touch README.md
-          git init
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Github Agent | Workflows has updated"
-          git remote add origin https://${{ secrets.ORG_ADMIN_TOKEN }}@github.com/gibonurs/SantaGib_${{ github.event.inputs.resourceType }}_${{ github.event.inputs.depName }}.git
-          git push -u origin master
-        
+          curl -i -u Santa:${{ secrets.ORG_ADMIN_TOKEN }} https://api.github.com/user/repos -d '{"name":"SantaGib_${{ github.event.inputs.resourceType }}_${{ github.event.inputs.depName }}", "auto_init": true}'      
 
